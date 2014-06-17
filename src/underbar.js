@@ -100,12 +100,13 @@ var _ = {};
     return result;
   };
 
-  var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
-
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    return _.filter(collection, function(value) {
+      return !test(value); 
+    });
   };
 
   // Produce a duplicate-free version of the array.
