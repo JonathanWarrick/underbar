@@ -39,7 +39,7 @@ var _ = {};
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(array.length < n) {
+    if (array.length < n) {
       return array;
     }
     else {
@@ -54,7 +54,7 @@ var _ = {};
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     // define spec for arrays
-    if(Array.isArray(collection)) {
+    if (Array.isArray(collection)) {
       for(var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
       }
@@ -87,7 +87,20 @@ var _ = {};
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    // create empty placeholder array for results
+    var result = [];
+    
+    // want to go through each element in collection and return those where test(value) === true.
+    _.each(collection, function(value) {    // note: do not need to provide all three inputs for iterator function.
+      if (test(value)) {
+        result.push(value);
+      }
+    });
+
+    return result;
   };
+
+  var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
