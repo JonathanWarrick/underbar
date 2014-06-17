@@ -111,6 +111,31 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    // create empty placeholder array for first instance of each value
+    var result = [];
+
+    // want to go through each element in collection and add those that do not have duplicate values to result.
+    _.each(array, function(value, key, collection) {
+      if (key === 0) {
+        result.push(value);
+      }
+
+      else {
+        var foundDup = false;
+        
+        _.each(result, function(existValue) {
+          if (value === existValue) {
+            foundDup = true;
+          }
+        });
+
+        if (!foundDup) {
+          result.push(value);
+        }
+      }
+    });
+
+    return result;
   };
 
 
