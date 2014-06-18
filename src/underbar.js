@@ -208,7 +208,7 @@ var _ = {};
     if (arguments.length < 3) {
       accumulator = collection[0];
     }
-    
+
     _.each(collection, function(value) {
       accumulator = iterator(accumulator, value);
     });
@@ -228,10 +228,16 @@ var _ = {};
     }, false);
   };
 
-
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    return _.reduce(collection, function(notFound, item) {
+      if (notFound) {
+        return false;
+      }
+
+      return iterator(item);
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
