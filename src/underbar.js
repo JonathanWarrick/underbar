@@ -285,9 +285,9 @@ var _ = {};
 
     // loop through each argument to extend properties to the existing object
     _.each(sources, function(sourceObj) {
-      for (var prop in sourceObj) {
-        obj[prop] = sourceObj[prop];
-      }
+      _.each(sourceObj, function(value, key) {
+        obj[key] = sourceObj[key];
+      });
     });
 
     return obj;
@@ -306,16 +306,15 @@ var _ = {};
 
     // loop through each argument to extend properties to the existing object
     _.each(sources, function(sourceObj) {
-      for (var prop in sourceObj) {
-        if (!(prop in obj)) {
-        obj[prop] = sourceObj[prop];
+      _.each(sourceObj, function(value, key) {
+        if (!(key in obj)) {
+        obj[key] = sourceObj[key];
         }
-      }
+      });
     });
 
     return obj;
   };
-
 
   /**
    * FUNCTIONS
