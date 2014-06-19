@@ -230,9 +230,14 @@ var _ = {};
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    // add default function, in the case that iterator isn't provided/defined
+    if (arguments.length < 2) {
+      iterator = _.identity;
+    }
+
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(allFound, item) {
-      return iterator(item) && allFound;
+      return !!iterator(item) && allFound;
     }, true);
   };
 
