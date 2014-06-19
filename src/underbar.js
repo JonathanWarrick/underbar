@@ -353,8 +353,20 @@ var _ = {};
   // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  _.memoize = function(func) {
 
+  // refer to link for help: http://www.sitepoint.com/implementing-memoization-in-javascript/
+  _.memoize = function(func) {
+    var memo = {}; // create a blank object function to be filled-in with memoized information.
+
+    return function(param) {
+      // if memo already contains the parameter passed to the function, assign pre-existing result.
+      // if not, invoke the function.
+      if (!(param in memo)) {
+        memo[param] = func.apply(this, arguments);
+      }
+
+      return memo[param];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
