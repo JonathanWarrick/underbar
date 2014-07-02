@@ -432,18 +432,26 @@ var _ = {};
   _.zip = function() {
     // create empty array to store zipped results
     var maxLength = 0;
+    
     // loop through each argument to find max length (assume all arrays)
     _.each(arguments, function(value, key, arg) {
-      if(arg.length > maxLength) {
-        maxLength = arg.Length;
+      if(value.length > maxLength) {
+        maxLength = value.Length;
       }
     });
 
     var results = Array(maxLength);
 
-    _.each(results, function(key) {
-      results[key] = Array(maxLength);
+    _.each(results, function(value, key, arg) {
+      arg[key] = Array(arguments.length);
     });
+
+    _.each(arguments, function(value, key, args) {
+      _.each(args, function(value, key, arg) {
+        results[key].push(value);
+      });
+    });
+
     return results;
   };
 
