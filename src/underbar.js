@@ -436,7 +436,7 @@ var _ = {};
     console.log(arguments.length);
     
     // loop through each argument to find max length (assume all arrays)
-    _.each(arguments, function(value, key, arg) {
+    _.each(arguments, function(value, key, args) {
       if(value.length > maxLength) {
         maxLength = value.length;
       }
@@ -448,6 +448,11 @@ var _ = {};
       results[key] = [];
     });
 
+    _.each(arguments, function(argArray) {
+      _.each(argArray, function(value, key, arg) {
+        results[key].push(value);
+      });
+    });
     console.log(results);
 
     return results;
