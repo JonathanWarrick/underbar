@@ -164,7 +164,7 @@ var _ = {};
 
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
-  _.invoke = function(collection, functionOrKey, args) {
+    _.invoke = function(collection, functionOrKey, args) {
     // need to check if functionOrKey is the actual function definition or a name of a pre-defined function
     // if the function is defined in the call to _.invoke
     if (typeof functionOrKey === "function") {
@@ -173,7 +173,7 @@ var _ = {};
       });
     } else {
       return _.map(collection, function(value) {
-        value[functionOrKey].apply(value, args);
+        return value[functionOrKey].apply(value, args);
       });
     }
   };
@@ -219,14 +219,12 @@ var _ = {};
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // add default function, in the case that iterator isn't provided/defined
-    if (arguments.length < 2) {
-      iterator = _.identity;
-    }
+    // supply default value if iterator isn't supplied
+    iterator = iterator || _.identity;
 
-    // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(allFound, item) {
-      return !!iterator(item) && allFound;
+      // need to type-cast result
+      return !!(allFound && iterator(item));
     }, true);
   };
 
@@ -453,7 +451,7 @@ var _ = {};
   _.flatten = function(nestedArray, result) {
     var results = [];
     _.each(nestedArray, function(value) {
-      
+
     })
   };
 
