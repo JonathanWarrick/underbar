@@ -233,12 +233,10 @@ var _ = {};
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     // add default function, in the case that iterator isn't provided/defined
-    if (arguments.length < 2) {
-      iterator = _.identity;
-    }
+    iterator = iterator || _.identity;
 
     return _.reduce(collection, function(someFound, item) {
-      return !!iterator(item) || someFound;
+      return !!(someFound || iterator(item));
     }, false);
   };
 
