@@ -171,12 +171,9 @@ var _ = {};
       return _.map(collection, function(value) {
         return functionOrKey.apply(value, args);
       });
-    }
-
-    // else use the function name
-    else {
+    } else {
       return _.map(collection, function(value) {
-        return value[functionOrKey].apply(value, args);
+        value[functionOrKey].apply(value, args);
       });
     }
   };
