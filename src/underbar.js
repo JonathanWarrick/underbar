@@ -41,9 +41,8 @@ var _ = {};
   _.last = function(array, n) {
     if (array.length < n) {
       return array;
-    }
-    else {
-      return n === undefined ? array[array.length - 1] : array.slice((array.length - n));  
+    } else {
+    return n === undefined ? array[array.length - 1] : array.slice(array.length - n, array.length);
     }
   };
 
@@ -446,6 +445,7 @@ var _ = {};
     _.each(results, function(value, key, collection) {
       results[key] = Array(argsLength);
     });
+    console.log(results);
 
     _.each(arguments, function(arg, index, argArray) {
       _.each(arg, function(value, key, arg) {
@@ -461,6 +461,10 @@ var _ = {};
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var results = [];
+    _.each(nestedArray, function(value) {
+      
+    })
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
