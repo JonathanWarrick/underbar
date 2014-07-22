@@ -164,18 +164,16 @@ var _ = {};
 
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
-    _.invoke = function(collection, functionOrKey, args) {
+  _.invoke = function(collection, functionOrKey, args) {
     // need to check if functionOrKey is the actual function definition or a name of a pre-defined function
     // if the function is defined in the call to _.invoke
-    if (typeof functionOrKey === "function") {
-      return _.map(collection, function(value) {
+    return _.map(collection, function(value) {
+      if (typeof functionOrKey === "function") {
         return functionOrKey.apply(value, args);
-      });
-    } else {
-      return _.map(collection, function(value) {
+      } else {
         return value[functionOrKey].apply(value, args);
-      });
-    }
+      }
+    });
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -415,12 +413,6 @@ var _ = {};
             console.log(value[iterator]);
             console.log(existingValue[iterator]);
             console.log(value[iterator] <= existingValue[iterator]);
-            if (value[iterator] <= existingValue[iterator]) {
-              var tempArray = [];
-              tempArray.slice(existingIndex);
-              console.log(tempArray);
-            } 
-            console.log(results);
           });
         }
       });
@@ -477,6 +469,21 @@ var _ = {};
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var results = [];
+    var firstArray = arguments[0];
+    var otherArrays = arguments.slice(1);
+    // 1 - loop through each item in the first array and set each item as the target for contains
+    _.each(firstArray, function(target) {
+      _.every(otherArrays, function(testValue) {
+        return _.contains(otherArrays, target);
+      });
+    });
+    return results;
+
+
+
+    // 2 - loop through the rest of the arrays to see if they all contain target using every
+    // 3 - if every returns true, then push to results
   };
 
   // Take the difference between one array and a number of other arrays.
